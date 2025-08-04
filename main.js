@@ -43,8 +43,17 @@ function showPopup(dateKey) {
   assignedList.innerHTML = "";
   (asignaciones[dateKey] || []).forEach(a => {
     const li = document.createElement("li");
-    li.textContent = `${a.login} - Turno: ${a.turno} - Procesos: ${a.procesos.join(", ")}`;
-    li.style.color = a.color;
+    // text
+    const span = document.createElement("span");
+    span.textContent = `${a.login} - Turno: ${a.turno} - Procesos: ${a.procesos.join(", ")}`;
+    span.style.color = a.color;
+    // remove button
+    const btn = document.createElement("button");
+    btn.textContent = "Quitar";
+    btn.classList.add("removeBtn");
+    btn.onclick = () => removeAssociate(dateKey, a.login);
+    li.appendChild(span);
+    li.appendChild(btn);
     assignedList.appendChild(li);
   });
   selectAssociate.innerHTML = "";
@@ -65,6 +74,14 @@ function showPopup(dateKey) {
     renderCalendar();
     showPopup(dateKey);
   };
+}
+
+function removeAssociate(dateKey, login) {
+  asignaciones[dateKey] = (asignaciones[dateKey] || []).filter(a => a.login !== login);
+  if(asignaciones[dateKey].length === 0) delete asignaciones[dateKey];
+  localStorage.setItem("asignaciones_hl3", JSON.stringify(asignaciones));
+  renderCalendar();
+  showPopup(dateKey);
 }
 
 closeBtn.onclick = () => popup.classList.add("hidden");
