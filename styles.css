@@ -47,3 +47,7 @@ h1 { text-align: center; margin: 20px 0; }
 #addAssociateBtn, #closeBtn, .removeBtn { padding: 6px 12px; }
 .removeBtn { background: #ff4d4d; color: white; border: none; border-radius: 4px; cursor: pointer; }
 .removeBtn:hover { background: #e04343; }
+/* Turno colors */
+.turno-label { padding: 2px 6px; border-radius: 4px; color: white; margin-right: 8px; }
+/* Process badge */
+.proc-badge { padding: 2px 6px; border-radius: 4px; color: white; margin-right: 4px; font-size: 12px; }
